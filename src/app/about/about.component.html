@@ -1,0 +1,56 @@
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      A propos
+    </div>
+    <div class="panel-body">
+      <p>Nom : <strong>{{infos.name}}</strong></p>
+      <p>Email : <strong>{{infos.email}}</strong></p>
+    </div>
+    <div class="panel-footer">
+
+    </div>
+  </div>
+</div>
+
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+      <input type="text" pInputText placeholder="Username">
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <button pButton type="button" label="Search"></button>
+      <input type="text" pInputText placeholder="Keyword">
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Keyword">
+      <button pButton type="button" icon="fa fa-superpowers" class="ui-button-warn"></button>
+    </div>
+  </div>
+</div>
+
+
+<h1>{{parentTitle}}</h1>
+<child-one
+  [ctMsg]="'Indian City Names'"
+  [ctArray]="cityArray"
+  [studentAddMsg]="stdAddMsg"
+  (addStudentEvent) = "saveData($event)"
+  (sendMsgEvent) = "printMsg($event)" >
+</child-one>
+---------------------
+<p>Name: {{stdFullName}}</p>
+<p>Message: {{msg}}</p>
+---------------------
+<child-two
+  [studentMsg] = "stdMsg"
+  [stdLeader] = "stdLeaderObj"
+  (addNumberEvent) = "printSum($event)" >
+</child-two>
+---------------------
+<p>Sum: {{sum}}</p>

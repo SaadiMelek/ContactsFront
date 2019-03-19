@@ -1,40 +1,19 @@
-import { Injectable } from '@angular/core';
-import {Book} from '../model/model.book';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
-const BOOKS: Book[] = [
-  {"id": 1, "name": "Java", "author": "Mahesh", "state": "off"},
-  {"id": 2, "name": "Angular", "author": "Mahesh", "state": "off"},
-  {"id": 3, "name": "Spring", "author": "Krishna", "state": "off"},
-  {"id": 4, "name": "Hibernate", "author": "Krishna", "state": "off"}
-];
-let booksPromise = Promise.resolve(BOOKS);
-
-@Injectable()
-export class BookService {
-  getBooks(): Promise<Book[]> {
-    return booksPromise;
-  }
-  addBook(book: Book): Promise<Book> {
-    return this.getBooks()
-      .then(books => {
-          let maxIndex = books.length - 1;
-          let bookWithMaxIndex = books[maxIndex];
-          book.id = bookWithMaxIndex.id + 1;
-          book.state= 'off';
-          books.push(book);
-          return book;
-        }
-      );
-  }
-  getBook(id: number): Promise<Book> {
-    return this.getBooks()
-      .then(books => books.find(book => book.id === id));
-  }
-  resetBookState(book: Book): Promise<Book[]> {
-    return this.getBooks().then(books => {
-      books.map(book => book.state='off');
-      book.state = 'on';
-      return books;
-    });
-  }
-}
+export const ON_OFF_ANIMATION =
+  trigger('onOffTrigger', [
+    state('off', style({
+      backgroundColor: '#E5E7E9',
+      color: '#1C2833',
+      fontSize: '18px',
+      transform: 'scale(1)'
+    })),
+    state('on',   style({
+      backgroundColor: '#17202A',
+      color: '#F0F3F4',
+      fontSize: '19px',
+      transform: 'scale(1.1)'
+    })),
+    transition('off => on', animate(100)),
+    transition('on => off', animate(100))
+  ]);

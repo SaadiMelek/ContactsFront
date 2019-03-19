@@ -1,19 +1,39 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger, group } from '@angular/animations';
 
-export const ON_OFF_ANIMATION =
-  trigger('onOffTrigger', [
-    state('off', style({
-      backgroundColor: '#E5E7E9',
-      color: '#1C2833',
-      fontSize: '18px',
-      transform: 'scale(1)'
+export const FLY_IN_OUT_ANIMATION =
+  trigger('flyInOutTrigger', [
+    state('in', style({
+      backgroundColor: '#7BBEFC',
+      color: '#080809',
+      transform: 'translateX(0)',
+      opacity: 1
     })),
-    state('on',   style({
-      backgroundColor: '#17202A',
-      color: '#F0F3F4',
-      fontSize: '19px',
-      transform: 'scale(1.1)'
-    })),
-    transition('off => on', animate(100)),
-    transition('on => off', animate(100))
+    transition(':enter', [
+      style({
+        backgroundColor: '#E3E8EC',
+        transform: 'translateX(300%)',
+        opacity: 0
+      }),
+      group([
+        animate('0.5s 0.1s ease-in', style({
+          transform: 'translateX(0)',
+        })),
+        animate('0.3s 0.1s ease', style({
+          opacity: 1
+        }))
+      ])
+    ]),
+    transition(':leave', [
+      style({
+        backgroundColor: '#9DCEFC',
+      }),
+      group([
+        animate('0.5s ease-out', style({
+          transform: 'translateX(300%)'
+        })),
+        animate('0.3s 0.1s ease', style({
+          opacity: 0
+        }))
+      ])
+    ])
   ]);

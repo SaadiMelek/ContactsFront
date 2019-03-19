@@ -1,8 +1,4 @@
-export class Book {
-  id: number;
-  name: string;
-  author: string;
-  state: string;
-  constructor() {
+export class Student {
+  constructor(public fname?: string, public lname?: string) {
   }
 }
