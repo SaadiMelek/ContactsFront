@@ -18,7 +18,7 @@ export class ContactsComponent implements OnInit {
   currentPage:number=0;
   size:number=2;
   pages:Array<number>;
-  count:number;
+  count:number=-1;
 
   constructor(public http:Http, public contactsService:ContactsService, public router:Router) { }
 
@@ -33,6 +33,7 @@ export class ContactsComponent implements OnInit {
         this.pages=new Array<number>(data.totalPages);
         this.count=data.totalElements;
       }, err => {
+        this.count=0;
         console.log('error' + err);
         throw err;
       });
